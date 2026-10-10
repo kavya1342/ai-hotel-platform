@@ -1,0 +1,13 @@
+{
+  "model_type": "GradientBoostingRegressor",
+  "forecast_horizon": "one_day_ahead",
+  "training_rows": 765,
+  "training_start_date": "2015-07-29",
+  "training_end_date": "2017-08-31",
+  "target": "Daily occupied-room demand proxy for City Hotel.",
+  "rolling_validation_mean_mae": 11.8386,
+  "baseline_mean_mae": 12.8733,
+  "mae_improvement_vs_baseline_percent": 8.04,
+  "validation_folds": 5,
+  "important_limitation": "Target is a demand proxy constructed from non-cancelled historical stays, not verified physical hotel occupancy."
+}

@@ -1,0 +1,23 @@
+{
+  "train_rows": 681,
+  "test_rows": 90,
+  "train_start": "2015-07-29",
+  "train_end": "2017-06-08",
+  "test_start": "2017-06-09",
+  "test_end": "2017-09-06",
+  "baseline_lag1": {
+    "mae": 8.7444,
+    "rmse": 16.2594,
+    "r2": 0.8719
+  },
+  "baseline_lag7": {
+    "mae": 18.0667,
+    "rmse": 45.5461,
+    "r2": -0.0055
+  },
+  "random_forest": {
+    "mae": 9.1183,
+    "rmse": 17.8976,
+    "r2": 0.8447
+  }
+}
