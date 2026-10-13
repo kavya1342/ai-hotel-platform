@@ -1,4 +1,4 @@
-from backend.app.services.occupancy_forecast_service import (
+from app.services.occupancy_forecast_service import (
     build_next_day_features,
     classify_demand,
     load_model_artifact,
@@ -39,7 +39,6 @@ def test_feature_generation_contains_required_features():
     }
 
     assert set(features.keys()) == required_features
-
     assert target_date > history["date"].iloc[-1]
 
 
