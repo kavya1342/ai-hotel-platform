@@ -5,6 +5,9 @@ class OccupancyForecastResponse(BaseModel):
     forecast_date: str
     predicted_occupied_rooms: float
 
+    demand_level: str
+    operational_recommendation: str
+
     model: str
     forecast_horizon: str
     historical_data_end: str

@@ -125,6 +125,50 @@ def build_next_day_features(
     return target_date, feature_row
 
 
+def classify_demand(
+    prediction: float,
+    history: pd.DataFrame,
+):
+    occupied = history["occupied_rooms"]
+
+    low_threshold = float(
+        occupied.quantile(0.33)
+    )
+
+    high_threshold = float(
+        occupied.quantile(0.67)
+    )
+
+    if prediction < low_threshold:
+        return (
+            "LOW",
+            (
+                "Lower historical demand is expected. "
+                "Use the period for preventive maintenance, "
+                "staff training, and non-urgent room work."
+            ),
+        )
+
+    if prediction <= high_threshold:
+        return (
+            "MEDIUM",
+            (
+                "Moderate historical demand is expected. "
+                "Maintain normal housekeeping and front-desk "
+                "coverage while monitoring room readiness."
+            ),
+        )
+
+    return (
+        "HIGH",
+        (
+            "High historical demand is expected. "
+            "Review housekeeping coverage, front-desk staffing, "
+            "and room readiness before the forecast date."
+        ),
+    )
+
+
 def predict_next_day_occupancy():
     artifact = load_model_artifact()
 
@@ -159,12 +203,25 @@ def predict_next_day_occupancy():
         0.0,
     )
 
+    demand_level, recommendation = (
+        classify_demand(
+            prediction,
+            history,
+        )
+    )
+
     return {
         "forecast_date":
             target_date.date().isoformat(),
 
         "predicted_occupied_rooms":
             round(prediction, 1),
+
+        "demand_level":
+            demand_level,
+
+        "operational_recommendation":
+            recommendation,
 
         "model":
             type(model).__name__,

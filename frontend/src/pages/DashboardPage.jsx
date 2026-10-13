@@ -43,8 +43,8 @@ function DashboardPage() {
 
         setDashboardData(data)
 
-        // ML forecast is intentionally loaded separately.
-        // A forecast failure should not break the whole dashboard.
+        // Load the ML forecast separately so that a forecast
+        // failure does not break the entire dashboard.
         if (user.role === 'MANAGER') {
           try {
             const forecast = await getOccupancyForecast()
@@ -329,6 +329,8 @@ function DashboardPage() {
 
                   {occupancyForecast ? (
                     <>
+                      {/* FORECAST METRICS */}
+
                       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <div className="rounded-xl bg-blue-50 p-5">
                           <p className="text-xs font-semibold uppercase tracking-wide text-blue-600">
@@ -393,6 +395,45 @@ function DashboardPage() {
                           </p>
                         </div>
                       </div>
+
+                      {/* DEMAND LEVEL + RECOMMENDATION */}
+
+                      <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-5">
+                        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                              Predicted Demand Level
+                            </p>
+
+                            <span
+                              className={`mt-2 inline-flex rounded-full px-3 py-1 text-sm font-bold ${
+                                occupancyForecast.demand_level === 'HIGH'
+                                  ? 'bg-red-100 text-red-700'
+                                  : occupancyForecast.demand_level ===
+                                      'MEDIUM'
+                                    ? 'bg-amber-100 text-amber-700'
+                                    : 'bg-green-100 text-green-700'
+                              }`}
+                            >
+                              {occupancyForecast.demand_level}
+                            </span>
+                          </div>
+
+                          <div className="max-w-3xl">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                              Operational Recommendation
+                            </p>
+
+                            <p className="mt-2 text-sm font-medium leading-6 text-slate-700">
+                              {
+                                occupancyForecast.operational_recommendation
+                              }
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* MODEL DETAILS */}
 
                       <div className="mt-5 rounded-xl border border-slate-200 p-5">
                         <div className="grid gap-4 md:grid-cols-3">
