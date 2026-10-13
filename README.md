@@ -5,6 +5,18 @@ An AI-enabled hotel management platform that combines hotel operations, guest-se
 The system is designed as a final-year B.Tech project and portfolio application with a production-style architecture using React, FastAPI, PostgreSQL, Gemini AI, and scikit-learn.
 
 ---
+## Live Deployment
+
+**Frontend:**  
+https://ai-hotel-frontend-fx90.onrender.com
+
+**Backend API:**  
+https://ai-hotel-api.onrender.com
+
+**Swagger API Documentation:**  
+https://ai-hotel-api.onrender.com/docs
+
+> The application is deployed on Render. Free-tier services may take a short time to wake up after inactivity.
 
 ## Features
 
